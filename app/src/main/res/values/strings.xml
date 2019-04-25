@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">RSERU</string>
+    <string name="monday_RU">Понедельник</string>
+    <string name="tuesday_RU">Вторник</string>
+    <string name="wednesday_RU">Среда</string>
+    <string name="thursday_RU">Четверг</string>
+    <string name="friday_RU">Пятница</string>
+    <string name="saturday_RU">Суббота</string>
+    <string name="sunday_RU">Воскресение</string>
 </resources>
