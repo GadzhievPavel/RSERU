@@ -11,7 +11,6 @@ public class MySQLquery {
     public MySQLquery(Context context){
         this.context=context;
     }
-    private final int
     private int nominator=0;
     private int denominator=0;
     Calendar calendar = Calendar.getInstance();
