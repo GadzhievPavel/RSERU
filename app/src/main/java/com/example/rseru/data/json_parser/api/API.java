@@ -12,7 +12,7 @@ public interface API {
     @GET("settings.json")
     Call<Settings> getSettings();
     @GET("{id}"+".json")
-    Call<GroupTime> getGroup(@Path("id") int id);
+    Call<GroupTime> getGroup(@Path("id") String id);
     @GET("times.json")
     Call<TimeList> getTimeList();
 

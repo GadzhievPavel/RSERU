@@ -4,25 +4,25 @@ import com.google.gson.annotations.SerializedName;
 
 public class Denominator
 {
-    @SerializedName("weekDay")
+    //@SerializedName("weekDay")
     private int weekDay;
-    @SerializedName("timeId")
+   // @SerializedName("timeId")
     private int timeId;
-    @SerializedName("duration")
+   // @SerializedName("duration")
     private int duration;
-    @SerializedName("title")
+    //@SerializedName("title")
     private String title;
-    @SerializedName("type")
+    //@SerializedName("type")
     private String type;
-    @SerializedName("optional")
+   // @SerializedName("optional")
     private int optional;
-    @SerializedName("teachers")
+   // @SerializedName("teachers")
     private String teachers;
-    @SerializedName("room")
+    //@SerializedName("room")
     private String room;
-    @SerializedName("build")
+   // @SerializedName("build")
     private String build;
-    @SerializedName("dates")
+  //  @SerializedName("dates")
     private String dates;
 
     public void setWeekDay(int weekDay){

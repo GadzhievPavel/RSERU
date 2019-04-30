@@ -3,11 +3,11 @@ package com.example.rseru.data.json_parser.api.source.subsource;
 import com.google.gson.annotations.SerializedName;
 
 public class Times {
-    @SerializedName("id")
+    //@SerializedName("id")
     private int id;
-    @SerializedName("to")
+    //@SerializedName("to")
     private String to;
-    @SerializedName("from")
+    //@SerializedName("from")
     private String from;
 
     public int getId() {

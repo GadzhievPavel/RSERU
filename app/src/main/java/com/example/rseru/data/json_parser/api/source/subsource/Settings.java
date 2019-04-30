@@ -3,12 +3,12 @@ package com.example.rseru.data.json_parser.api.source.subsource;
 import com.google.gson.annotations.SerializedName;
 
 public class Settings {
-    @SerializedName("startDate")
+   // @SerializedName("startDate")
     private String startDate;
-    @SerializedName("endDate")
+   // @SerializedName("endDate")
     private String endDate;
-    @SerializedName("isNumerator")
-    boolean isNumerator;
+   // @SerializedName("isNumerator")
+    String isNumerator;
 
     public String getStartDate() {
         return startDate;
@@ -22,11 +22,11 @@ public class Settings {
         return endDate;
     }
 
-    public boolean isNumerator() {
+    public String isNumerator() {
         return isNumerator;
     }
 
-    public void setNumerator(boolean numerator) {
+    public void setNumerator(String numerator) {
         isNumerator = numerator;
     }
 

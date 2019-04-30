@@ -1,51 +1,92 @@
 package com.example.rseru.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import com.example.rseru.data.json_parser.api.source.TimeList;
+import com.example.rseru.data.json_parser.api.source.subsource.Denominator;
+import com.example.rseru.data.json_parser.api.source.subsource.Numerator;
+import com.example.rseru.data.json_parser.api.source.subsource.Times;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 
 public class LocalDBHelper extends SQLiteOpenHelper {
+    private static String DB_PATH = "";
+    private SQLiteDatabase mDataBase;
+    private boolean mNeedUpdate = false;
 
     static final String DB_NAME="localDB";
-    static int VERSION=1;
+    static int VERSION=3;
+    static final String _ID="_id";
 
     //tabel SETTINGS
-    static final String SETTINGS_TABLE="'settings'";
-    static final String START_DATE="'startDate'";
-    static final String END_DATE="'endDate'";
-    static final String IS_NUMERATOR="'true'";
+    public final String SETTINGS_TABLE="'settings'";
+    public final String START_DATE="'startDate'";
+    public final String END_DATE="'endDate'";
+    public final String IS_NUMERATOR="'isNumerator11'";
     //tabel TIMES
-    static final String ID="'id'";
-    static final String FROM="'from'";
-    static final String TO="'to'";
+    public final String TIMES_TABLE="'table'";
+    public final String ID="'id'";
+    public final String FROM="'from'";
+    public final String TO="'to'";
     //tabels timeLine
-    static final String NUMERATOR_TABEL="'numerator'";
-    static final String DENOMINATOR="'denominator'";
-    static final String WEEKDAY="'weekday'";
-    static final String TIME_ID="'timeId'";
-    static final String DURATION="'duration'";
-    static final String TITLE="'title'";
-    static final String TYPE="'type'";
-    static final String OPTIONAL="'optional'";
-    static final String TEACHERS="'teachers'";
-    static final String ROOM="'room'";
-    static final String BUILD="'build'";
-    static final String DATES="'dates'";
+    public final String NUMERATOR_TABLE="'numerator'";
+    public final String DENOMINATOR_TABLE="'denominator'";
+    public final String NUMBER_GROUP="'gpoup'";
+    public final String WEEKDAY="'weekday'";
+    public final String TIME_ID="'timeId'";
+    public final String DURATION="'duration'";
+    public final String TITLE="'title'";
+    public final String TYPE="'type'";
+    public final String OPTIONAL="'optional'";
+    public final String TEACHERS="'teachers'";
+    public final String ROOM="'room'";
+    public final String BUILD="'build'";
+    public final String DATES="'dates'";
+    private final String createTimeLine="("+_ID+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,"
+            +NUMBER_GROUP+" TEXT NOT NULL,"+WEEKDAY+" INTEGER NOT NULL,"+TIME_ID+" INTEGER NOT NULL,"+
+            DURATION+" INTEGER NOT NULL,"+TITLE+" TEXT NOT NULL,"+TYPE+" TEXT NOT NULL,"+
+            TEACHERS+" TEXT,"+ROOM+" TEXT,"+BUILD+" TEXT NOT NULL,"+
+            DATES+" TEXT,"+OPTIONAL+" TEXT NOT NULL)";
 
-    public LocalDBHelper(Context context){
-        super(context,DB_NAME,null,VERSION);
+    public LocalDBHelper(Context context) {
+        super(context, DB_NAME, null,VERSION);
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "+SETTINGS_TABLE+"("+START_DATE+" TEXT NOT NULL,"+END_DATE+
-                " TEXT NOT NULL, "+IS_NUMERATOR+" TEXT NOT NULL)");
+        try {
+            db.execSQL("CREATE TABLE IF NOT EXISTS "+SETTINGS_TABLE+"("+_ID+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,"
+                    +START_DATE+" TEXT NOT NULL,"+END_DATE+
+                    " TEXT NOT NULL, "+IS_NUMERATOR+" TEXT NOT NULL)");
+//            db.execSQL("CREATE TABLE "+TIMES_TABLE+"("+_ID+" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,"
+//                    +ID+" INTEGER NOT NULL,"+FROM+" TEXT NOT NULL,"+
+//                    TO+" TEXT NOT NULL)");
+//            db.execSQL("CREATE TABLE "+NUMERATOR_TABLE+createTimeLine);
+//            db.execSQL("CREATE TABLE "+DENOMINATOR_TABLE+createTimeLine);
+            Log.e("CREATE DB","IS_GOOD");
+        }catch (SQLException e){
+            Log.e("SETCREAT","FAIL");
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        db.execSQL("DROP TABLE IF EXISTS " +SETTINGS_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " +DENOMINATOR_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " +NUMERATOR_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " +TIMES_TABLE);
+        onCreate(db);
     }
+
 }
