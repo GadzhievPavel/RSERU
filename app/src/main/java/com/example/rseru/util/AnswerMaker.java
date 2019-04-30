@@ -1,5 +1,6 @@
 package com.example.rseru.util;
 
+import android.content.ContentValues;
 import android.util.Log;
 
 import com.example.rseru.data.Answer;
@@ -39,15 +40,16 @@ public class AnswerMaker {
         return s;
     }
     public ArrayList<Answer> getAnswersN(List<Numerator> numerators){
-        ArrayList<Answer> answers=new ArrayList<>();
-        for (int i=0;i<numerators.size();i++){
-            Log.e("ANSWER",getStartTime(numerators.get(i).getTimeId()) );
-            answers.get(i).setFromTime(getStartTime(numerators.get(i).getTimeId()));
-            answers.get(i).setToTime(getEndTime(numerators.get(i).getTimeId(),numerators.get(i).getDuration()));
-            answers.get(i).setBuild(numerators.get(i).getBuild());
-            answers.get(i).setRoom(numerators.get(i).getRoom());
-            answers.get(i).setTeacher(numerators.get(i).getTeachers());
-            answers.get(i).setTitle(numerators.get(i).getTitle());
+       ArrayList<Answer> answers=new ArrayList<>();
+       for (int i=0;i<numerators.size();i++){
+           Answer answer= new Answer();
+           answer.setFromTime(getStartTime(numerators.get(i).getTimeId()));
+           answer.setToTime(getEndTime(numerators.get(i).getTimeId(),numerators.get(i).getDuration()));
+           answer.setTitle(numerators.get(i).getTitle());
+           answer.setRoom(numerators.get(i).getRoom());
+           answer.setTeacher(numerators.get(i).getTeachers());
+           answer.setBuild(numerators.get(i).getBuild());
+           answers.add(answer);
         }
         return answers;
     }

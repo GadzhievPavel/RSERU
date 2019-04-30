@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.rseru.data.Answer;
 import com.example.rseru.data.json_parser.api.source.subsource.Denominator;
@@ -21,13 +20,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 @SuppressLint("ValidFragment")
-public class PageFragment extends Fragment  {
+public class PageFragment extends Fragment {
     static final String ARGUMENT_PAGE_NUMBER = "arg_page_number";
+    private ArrayList<Answer> answers;
 
     int pageNumber;
     int backColor;
     private Context context;
-    private ArrayList<Answer> answers;
 
    public PageFragment(Context context, ArrayList<Answer> answers){
         this.answers=answers;
@@ -55,8 +54,8 @@ public class PageFragment extends Fragment  {
         RecyclerView recyclerView = view.findViewById(R.id.recycle);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         adapter = new MyRecyclerViewAdapter(context,answers);
+        //adapter.setClickListener(context);
         recyclerView.setAdapter(adapter);
         return view;
     }
-
 }
